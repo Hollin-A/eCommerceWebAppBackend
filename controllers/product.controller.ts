@@ -43,7 +43,8 @@ const addProduct = async (req: Request, res: Response): Promise<void> => {
 
     res.status(201).json({ message: "product added", product: newProduct });
   } catch (error) {
-    throw error;
+    res.status(400).json({ error });
+    // throw error;
   }
 };
 

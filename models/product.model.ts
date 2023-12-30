@@ -2,7 +2,7 @@ import { model, Schema, Model } from "mongoose";
 import { IProduct } from "../types/product";
 
 const ProductSchema: Schema = new Schema({
-  SKU: { type: String, required: true },
+  SKU: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
   unitPrice: { type: Number, required: false },
