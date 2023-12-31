@@ -13,6 +13,17 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+const getFavouriteProducts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const products: Product[] = await ProductModel.find({favourite: true}).sort({
+      updatedDate: -1,
+    });
+    res.status(200).json({ products });
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const product: Product | null = await ProductModel.findById(req.params.id);
@@ -126,6 +137,7 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
 
 export {
   getProducts,
+  getFavouriteProducts,
   getProduct,
   addProduct,
   updateProduct,

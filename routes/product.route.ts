@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getProducts,
+  getFavouriteProducts,
   getProduct,
   addProduct,
   updateProduct,
@@ -13,6 +14,8 @@ const router: Router = Router();
 router.post("/", addProduct);
 
 router.get("/", getProducts);
+
+router.get("/favourites", getFavouriteProducts);
 
 router.get("/:id", getProduct);
 
