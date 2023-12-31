@@ -8,6 +8,7 @@ const ProductSchema: Schema = new Schema({
   unitPrice: { type: Number, required: true },
   quantity: { type: Number, required: true },
   favourite: { type: Boolean, required: false },
+  images: { type: String, required: false },
   createDate: { type: Date, default: Date.now },
   updatedDate: { type: Date, default: Date.now },
   timestamps: { createDate: Date, updatedDate: Date },

@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 
+
 import { dbConnect } from "./config/db.config";
 
 import productRoutes from "./routes/product.route";

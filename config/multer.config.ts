@@ -3,13 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import path from "path";
 
 const storage = diskStorage({
-  destination: function (
-    req: Express.Request,
-    file: Express.Multer.File,
-    cb: (error: Error | null, destination: string) => void
-  ) {
-    cb(null, "images");
-  },
+  destination: "images",
   filename: function (
     req: Express.Request,
     file: Express.Multer.File,

@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import { Product } from "../types/product";
 import { ProductModel } from "../models/product.model";
+import * as fs from "fs";
 
 const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -13,9 +14,14 @@ const getProducts = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getFavouriteProducts = async (req: Request, res: Response): Promise<void> => {
+const getFavouriteProducts = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const products: Product[] = await ProductModel.find({favourite: true}).sort({
+    const products: Product[] = await ProductModel.find({
+      favourite: true,
+    }).sort({
       updatedDate: -1,
     });
     res.status(200).json({ products });
@@ -46,6 +52,7 @@ const addProduct = async (req: Request, res: Response): Promise<void> => {
       description: body.description,
       quantity: body.quantity,
       unitPrice: body.unitPrice,
+      images: req.file && req.file.filename,
       favourite: false,
       createDate: new Date(),
       updatedDate: new Date(),
@@ -87,6 +94,24 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
     });
   } catch (error) {
     throw error;
+  }
+};
+
+const getImage = async (req: Request, res: Response): Promise<void> => {
+  const {
+    params: { filename },
+  } = req;
+
+  const filepath = `images/${filename}`;
+
+  // Check if file exists
+  if (fs.existsSync(filepath)) {
+    // Read file and send in response
+    const fileContent = fs.readFileSync(filepath, "utf8");
+    res.send(fileContent);
+  } else {
+    // File not found
+    res.status(404).send("File not found");
   }
 };
 
@@ -138,6 +163,7 @@ const deleteProduct = async (req: Request, res: Response): Promise<void> => {
 export {
   getProducts,
   getFavouriteProducts,
+  getImage,
   getProduct,
   addProduct,
   updateProduct,

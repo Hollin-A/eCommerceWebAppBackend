@@ -7,6 +7,7 @@ export interface Product extends Document {
   quantity: number;
   unitPrice: number;
   favourite: boolean;
+  images: string;
   createDate: Date;
   updatedDate: Date;
   timestamps?: {};
