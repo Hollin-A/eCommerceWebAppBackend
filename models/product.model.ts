@@ -5,7 +5,7 @@ const ProductSchema: Schema = new Schema({
   SKU: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
-  unitPrice: { type: Number, required: false },
+  unitPrice: { type: Number, required: true },
   quantity: { type: Number, required: true },
   createDate: { type: Date, default: Date.now },
   updatedDate: { type: Date, default: Date.now },
