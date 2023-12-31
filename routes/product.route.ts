@@ -4,6 +4,7 @@ import {
   getProduct,
   addProduct,
   updateProduct,
+  toggleFavouriteProduct,
   deleteProduct,
 } from "../controllers/product.controller";
 
@@ -16,6 +17,8 @@ router.get("/", getProducts);
 router.get("/:id", getProduct);
 
 router.patch("/:id", updateProduct);
+
+router.patch("/favourite/:id", toggleFavouriteProduct);
 
 router.delete("/:id", deleteProduct);
 
